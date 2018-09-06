@@ -17,13 +17,19 @@ class Stack():
     def pop(self):
         return self.alist.pop()
 
-if __name__ == '__main__':
-    myStack = Stack()
-    print(myStack.isEmpty())
-    myStack.push('a')
-    print(myStack.size())
-    print(myStack.peek())
-    print(myStack.size())
-    print(myStack.isEmpty())
-    print(myStack.pop())
-    print(myStack.isEmpty())
+class Queue():
+    def __init__(self):
+        self.alist = []
+
+    def isEmpty(self):
+        return self.alist == []
+
+    def size(self):
+        return len(self.alist)
+
+    def enqueue(self, e):
+        self.alist.insert(0, e)
+
+    def dequeue(self):
+        return self.alist.pop()
+
