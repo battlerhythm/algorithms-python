@@ -3,14 +3,14 @@ import cProfile
 from mysort import BubbleSort, InsertionSort, SelectionSort, MergeSort
 
 class TestSortMethods(unittest.TestCase):
-    b = BubbleSort()
+    bb = BubbleSort()
     ins = InsertionSort()
     sel = SelectionSort()
     mrg = MergeSort()
 
     def test_BubbleSort(self):
         l = [e for e in reversed(range(5))]
-        l = self.b.sort(l)
+        l = self.bb.sort(l)
         self.assertEqual(l, [e for e in range(5)])
 
     def test_InsertionSort(self):
