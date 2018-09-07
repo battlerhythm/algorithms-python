@@ -1,10 +1,11 @@
 import unittest
-from myds import Stack, Queue, Deque
+from myds import Stack, Queue, Deque, LinkedList
 
 class TestDsMethods(unittest.TestCase):
     stk = Stack()
     q = Queue()
     dq = Deque()
+    ll = LinkedList()
 
     def test_Stack(self):
         self.stk.push(1)
@@ -38,6 +39,19 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual(1, self.dq.removeRear())
         self.assertEqual(2, self.dq.removeFront())
         self.assertEqual(True, self.dq.isEmpty())
+
+    def test_LinkedList(self):
+        self.ll.append(1)
+        self.ll.append(2)
+        self.ll.append(3)
+        self.ll.append(4)
+        self.assertEqual(4, self.ll.pop())
+        self.assertEqual(3, self.ll.pop())
+        self.assertEqual(2, self.ll.getSize())
+        self.assertEqual(2, self.ll.pop())
+        self.assertEqual(1, self.ll.pop())
+        self.assertEqual(True, self.ll.isEmpty())
+
 
 if __name__ == '__main__':
     unittest.main()
