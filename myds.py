@@ -131,6 +131,12 @@ class LinkedList():
         self.size += 1
 
     def pop(self, index=-1):
+        theNode = self.__getNodeAt(index)
+        self.__remove(theNode)
+        self.size -= 1
+        return theNode.getData()
+
+    def __getNodeAt(self, index):
         theNode = None
         if index >= 0 and index < self.size:
             theNode = self.head
@@ -142,11 +148,9 @@ class LinkedList():
                 theNode = theNode.getPrev()
         else:
             raise IndexError
-        self.__reWire(theNode)
-        self.size -= 1
-        return theNode.getData()
+        return theNode
     
-    def __reWire(self, item):
+    def __remove(self, item):
         if item.getNext() and item.getPrev():         # for itmes in middle
             item.getNext().setPrev(item.getPrev())
             item.getPrev().setNext(item.getNext())
