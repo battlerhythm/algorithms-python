@@ -64,8 +64,8 @@ class Node():
     def __str__(self):
         string = "currentNode: {data}\t prevNode: {prevNode}\t nextNode: {nextNode}\n".format(
             data=self.data,
-            prevNode=self.prevNode,
-            nextNode=self.nextNode
+            prevNode=self.prevNode.getData() if self.prevNode is not None else "None",
+            nextNode=self.nextNode.getData() if self.nextNode is not None else "None"
         )
         return string
 
@@ -105,7 +105,7 @@ class LinkedList():
             return alist
         node = self.head
         alist.append(node.getData())
-        for _ in range(self.size-1):
+        for _ in range(self.size-1): # O(n)
             node = node.getNext()
             alist.append(node.getData())
         return alist
@@ -121,25 +121,45 @@ class LinkedList():
             self.head = self.tail = newNode
         self.size += 1
 
-    def pop(self):
-        data = self.tail.getData()
-        if self.size is 1:
-            self.tail = None
-            self.head = None
+    def pop(self, index=-1):
+        theNode = None
+        if index >= 0 and index < self.size:
+            theNode = self.head
+            for _ in range(index):
+                theNode = theNode.getNext()
+        elif index < 0 and abs(index)-1 < self.size:
+            theNode = self.tail
+            for _ in range(abs(index)-1):
+                theNode = theNode.getPrev()
         else:
-            self.tail = self.tail.getPrev()
-            self.tail.setNext = None
+            raise IndexError
+        if theNode.getNext() and theNode.getPrev():         # for itmes in middle
+            theNode.getNext().setPrev(theNode.getPrev())
+            theNode.getPrev().setNext(theNode.getNext())
+        elif theNode.getNext():                             # for index 0
+            theNode.getNext().setPrev(None)
+            self.head = theNode.getNext
+        elif theNode.getPrev():                             # for index -1
+            theNode.getPrev().setNext(None)
+            self.tail = theNode.getPrev()
+        else:                                               # for single item
+            self.head = None
+            self.tail = None
+        
         self.size -= 1
-        return data
+        return theNode.getData()
         
 if __name__ == '__main__':
     ll = LinkedList()
     ll.append(1)
     ll.append(2)
     ll.append(3)
-    ll.pop()
+    print(ll.pop(1))
+    print(ll.show())
+    print(ll.getSize())
     ll.pop()
     ll.pop()
     print(ll.show())
+    print(ll.isEmpty())
 
         

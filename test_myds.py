@@ -45,10 +45,10 @@ class TestDsMethods(unittest.TestCase):
         self.ll.append(2)
         self.ll.append(3)
         self.ll.append(4)
-        self.assertEqual(4, self.ll.pop())
-        self.assertEqual(3, self.ll.pop())
+        self.assertEqual(2, self.ll.pop(1))
+        self.assertEqual(4, self.ll.pop(2))
         self.assertEqual(2, self.ll.getSize())
-        self.assertEqual(2, self.ll.pop())
+        self.assertEqual(3, self.ll.pop())
         self.assertEqual(1, self.ll.pop())
         self.assertEqual(True, self.ll.isEmpty())
 
