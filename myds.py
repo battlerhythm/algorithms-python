@@ -142,22 +142,24 @@ class LinkedList():
                 theNode = theNode.getPrev()
         else:
             raise IndexError
-        if theNode.getNext() and theNode.getPrev():         # for itmes in middle
-            theNode.getNext().setPrev(theNode.getPrev())
-            theNode.getPrev().setNext(theNode.getNext())
-        elif theNode.getNext():                             # for index 0
-            theNode.getNext().setPrev(None)
-            self.head = theNode.getNext
-        elif theNode.getPrev():                             # for index -1
-            theNode.getPrev().setNext(None)
-            self.tail = theNode.getPrev()
+        self.__reWire(theNode)
+        self.size -= 1
+        return theNode.getData()
+    
+    def __reWire(self, item):
+        if item.getNext() and item.getPrev():         # for itmes in middle
+            item.getNext().setPrev(item.getPrev())
+            item.getPrev().setNext(item.getNext())
+        elif item.getNext():                             # for index 0
+            item.getNext().setPrev(None)
+            self.head = item.getNext
+        elif item.getPrev():                             # for index -1
+            item.getPrev().setNext(None)
+            self.tail = item.getPrev()
         else:                                               # for single item
             self.head = None
             self.tail = None
-        
-        self.size -= 1
-        return theNode.getData()
-        
+
 if __name__ == '__main__':
     stk = Stack()
     stk.push(1)
