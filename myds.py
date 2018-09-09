@@ -2,6 +2,9 @@ class Stack():
     def __init__(self):
         self.items = []
 
+    def __str__(self):
+        return str(self.items)
+
     def isEmpty(self):
         return self.items == []
 
@@ -21,6 +24,9 @@ class Queue():
     def __init__(self):
         self.items = []
 
+    def __str__(self):
+        return str(self.items)
+
     def isEmpty(self):
         return self.items == []
 
@@ -36,6 +42,9 @@ class Queue():
 class Deque():
     def __init__(self):
         self.items = []
+
+    def __str__(self):
+        return str(self.items)
 
     def isEmpty(self):
         return self.items == []
@@ -93,13 +102,7 @@ class LinkedList():
         self.tail = None
         self.size = 0
 
-    def isEmpty(self):
-        return self.head == None and self.tail == None
-
-    def getSize(self):
-        return self.size
-
-    def show(self):
+    def __str__(self):
         alist = []
         if self.size is 0:
             return alist
@@ -108,7 +111,13 @@ class LinkedList():
         for _ in range(self.size-1): # O(n)
             node = node.getNext()
             alist.append(node.getData())
-        return alist
+        return str(alist)
+
+    def isEmpty(self):
+        return self.head == None and self.tail == None
+
+    def getSize(self):
+        return self.size
 
     def append(self, item):
         newNode = Node(item)
@@ -150,16 +159,9 @@ class LinkedList():
         return theNode.getData()
         
 if __name__ == '__main__':
-    ll = LinkedList()
-    ll.append(1)
-    ll.append(2)
-    ll.append(3)
-    print(ll.pop(1))
-    print(ll.show())
-    print(ll.getSize())
-    ll.pop()
-    ll.pop()
-    print(ll.show())
-    print(ll.isEmpty())
+    stk = Stack()
+    stk.push(1)
+    stk.push(2)
+    print(stk)
 
         
