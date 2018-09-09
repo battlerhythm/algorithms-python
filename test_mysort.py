@@ -9,30 +9,28 @@ class TestSortMethods(unittest.TestCase):
     mrg = MergeSort()
     qck = QuickSort()
 
+    dataSet = [e for e in reversed(range(5))]
+    answer = [e for e in range(5)]
+
     def test_BubbleSort(self):
-        alist = [e for e in reversed(range(5))]
-        alist = self.bb.sort(alist)
-        self.assertEqual(alist, [e for e in range(5)])
+        alist = self.dataSet
+        self.assertEqual(self.bb.sort(alist), self.answer)
 
     def test_InsertionSort(self):
-        alist = [e for e in reversed(range(5))]
-        alist = self.ins.sort(alist)
-        self.assertEqual(alist, [e for e in range(5)])
+        alist = self.dataSet
+        self.assertEqual(self.ins.sort(alist), self.answer)
 
     def test_SelectionSort(self):
-        alist = [e for e in reversed(range(5))]
-        alist = self.sel.sort(alist)
-        self.assertEqual(alist, [e for e in range(5)])
+        alist = self.dataSet
+        self.assertEqual(self.sel.sort(alist), self.answer)
 
     def test_MergeSort(self):
-        alist = [e for e in reversed(range(5))]
-        alist = self.mrg.sort(alist)
-        self.assertEqual(alist, [e for e in range(5)])
+        alist = self.dataSet
+        self.assertEqual(self.mrg.sort(alist), self.answer)
 
     def test_QuickSort(self):
-        alist = [e for e in reversed(range(5))]
-        alist = self.qck.sort(alist)
-        self.assertEqual(alist, [e for e in range(5)])
+        alist = self.dataSet
+        self.assertEqual(self.qck.sort(alist), self.answer)
 
 if __name__ == '__main__':
     unittest.main()
