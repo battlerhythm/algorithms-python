@@ -1,78 +1,78 @@
 class Stack():
     def __init__(self):
-        self.__items = []
+        self._items = []
 
     def __str__(self):
-        return str(self.__items)   
+        return str(self._items)   
 
     def isEmpty(self):
-        return self.__items == []
+        return self._items == []
 
     def size(self):
-        return len(self.__items)
+        return len(self._items)
 
     def push(self, item):
-        self.__items.append(item)
+        self._items.append(item)
 
     def peek(self):
-        return self.__items[-1]
+        return self._items[-1]
 
     def pop(self):
-        return self.__items.pop()
+        return self._items.pop()
 
 class Queue():
     def __init__(self):
-        self.__items = []
+        self._items = []
 
     def __str__(self):
-        return str(self.__items)
+        return str(self._items)
 
     def isEmpty(self):
-        return self.__items == []
+        return self._items == []
 
     def size(self):
-        return len(self.__items)
+        return len(self._items)
 
     def enqueue(self, item):
-        self.__items.append(item)
+        self._items.append(item)
 
     def dequeue(self):
-        return self.__items.pop(0)
+        return self._items.pop(0)
 
 class Deque():
     def __init__(self):
-        self.__items = []
+        self._items = []
 
     def __str__(self):
-        return str(self.__items)
+        return str(self._items)
 
     def isEmpty(self):
-        return self.__items == []
+        return self._items == []
 
     def size(self):
-        return len(self.__items)
+        return len(self._items)
 
     def addFront(self, item):
-        self.__items.insert(0, item)
+        self._items.insert(0, item)
     
     def addRear(self, item):
-        self.__items.append(item)
+        self._items.append(item)
 
     def removeFront(self):
-        return self.__items.pop(0)
+        return self._items.pop(0)
 
     def removeRear(self):
-        return self.__items.pop()
+        return self._items.pop()
 
 class Node():
     def __init__(self, data):
-        self.__data = data
-        self.__nextNode = None
-        self.__prevNode = None
+        self._data = data
+        self._nextNode = None
+        self._prevNode = None
 
     def __str__(self):
         string = "currentNode: {data}\t prevNode: {prevNode}\t nextNode: {nextNode}\n".format(
-            data=self.__data,
+            data=self._data,
             prevNode=self.prevNode.data if self.prevNode is not None else "None",
             nextNode=self.nextNode.data if self.nextNode is not None else "None"
         )
@@ -81,159 +81,202 @@ class Node():
     @property
     def data(self):
         """Return the data in the node"""
-        return self.__data
+        return self._data
 
     @property
     def nextNode(self):
         """Return the next node of the Node"""
-        return self.__nextNode
+        return self._nextNode
 
     @property
     def prevNode(self):
         """Return the previous node of the Node"""
-        return self.__prevNode
+        return self._prevNode
 
     @data.setter
     def data(self, newData):
-        self.__data = newData
+        self._data = newData
   
     @nextNode.setter
     def nextNode(self, newNextNode):
-        self.__nextNode = newNextNode
+        self._nextNode = newNextNode
   
     @prevNode.setter
     def prevNode(self, newPrevNode):
-        self.__prevNode = newPrevNode
+        self._prevNode = newPrevNode
 
 class LinkedList():
     def __init__(self):
-        self.__head = None
-        self.__tail = None
-        self.__size = 0
+        self._head = None
+        self._tail = None
+        self._size = 0
 
     def __str__(self):
         alist = []
-        if self.__size is 0:
+        if self._size is 0:
             return alist
-        node = self.__head
+        node = self._head
         alist.append(node.data)
-        for _ in range(self.__size-1): # O(n)
+        for _ in range(self._size-1): # O(n)
             node = node.nextNode
             alist.append(node.data)
         return str(alist)
 
     def isEmpty(self):
-        return self.__head == None and self.__tail == None
+        return self._head == None and self._tail == None
 
     @property
     def size(self):
         """Return the size of the LikedList"""
-        return self.__size
+        return self._size
 
     def append(self, item):
         newNode = Node(item)
-        if self.__head and self.__tail:
-            temp = self.__tail
+        if self._head and self._tail:
+            temp = self._tail
             newNode.prevNode = temp
             temp.nextNode = newNode
-            self.__tail = newNode
+            self._tail = newNode
         else:
-            self.__head = self.__tail = newNode
-        self.__size += 1
+            self._head = self._tail = newNode
+        self._size += 1
 
     def pop(self, index=-1):
-        theNode = self.__getNodeAt(index)
-        self.__remove(theNode)
-        self.__size -= 1
+        theNode = self._getNodeAt(index)
+        self._remove(theNode)
+        self._size -= 1
         return theNode.data
 
-    def __getNodeAt(self, index):
+    def _getNodeAt(self, index):
         theNode = None
-        if index >= 0 and index < self.__size:
-            theNode = self.__head
+        if index >= 0 and index < self._size:
+            theNode = self._head
             for _ in range(index):
                 theNode = theNode.nextNode
-        elif index < 0 and abs(index)-1 < self.__size:
-            theNode = self.__tail
+        elif index < 0 and abs(index)-1 < self._size:
+            theNode = self._tail
             for _ in range(abs(index)-1):
                 theNode = theNode.prevNode
         else:
             raise IndexError
         return theNode
     
-    def __remove(self, item):
+    def _remove(self, item):
         if item.nextNode and item.prevNode:             # for itmes in middle
             item.nextNode.prevNode = item.prevNode
             item.prevNode.nextNode = item.nextNode
         elif item.nextNode:                             # for index 0
             item.nextNode.prevNode = None
-            self.__head = item.nextNode
+            self._head = item.nextNode
         elif item.prevNode:                             # for index -1
             item.prevNode.nextNode = None
-            self.__tail = item.prevNode
+            self._tail = item.prevNode
         else:                                           # for single item
-            self.__head = None
-            self.__tail = None
+            self._head = None
+            self._tail = None
 
 class BinaryHeap():
     def __init__(self):
-        self.__items = [0]
-        self.__size = 0
+        self._items = [0]
+        self._size = 0
 
     @property
     def size(self):
-        return self.__size
+        return self._size
 
     @property
     def items(self):
-        return self.__items[1:]
+        return self._items[1:]
 
-    def __percUp(self, idx):
+    def _percUp(self, idx):
         while idx//2 > 0:
-            if self.__items[idx] < self.__items[idx//2]:
-                self.__items[idx], self.__items[idx//2] = self.__items[idx//2], self.__items[idx]
+            if self._items[idx] < self._items[idx//2]:
+                self._items[idx], self._items[idx//2] = self._items[idx//2], self._items[idx]
             idx //= 2
 
     def insert(self, item):
-        self.__items.append(item)
-        self.__size += 1
-        self.__percUp(self.__size)
+        self._items.append(item)
+        self._size += 1
+        self._percUp(self._size)
 
-    def __percDown(self, idx):
-        while idx*2 <= self.__size:
-            minIdx = self.__minChild(idx)
-            if self.__items[idx] > self.__items[minIdx]:
-                self.__items[idx], self.__items[minIdx] = self.__items[minIdx], self.__items[idx]
+    def _percDown(self, idx):
+        while idx*2 <= self._size:
+            minIdx = self._minChild(idx)
+            if self._items[idx] > self._items[minIdx]:
+                self._items[idx], self._items[minIdx] = self._items[minIdx], self._items[idx]
             idx = minIdx
 
-    def __minChild(self, idx):
-        if idx*2+1 > self.__size:
+    def _minChild(self, idx):
+        if idx*2+1 > self._size:
             return idx*2
         else:
-            if self.__items[idx*2] < self.__items[idx*2+1]:
+            if self._items[idx*2] < self._items[idx*2+1]:
                 return idx*2
             else:
                 return idx*2+1
 
     def delMin(self):
-        item = self.__items[1]
-        self.__items[1] = self.__items[self.size]
-        self.__size -= 1
-        self.__items.pop()
-        self.__percDown(1)
+        item = self._items[1]
+        self._items[1] = self._items[self.size]
+        self._size -= 1
+        self._items.pop()
+        self._percDown(1)
         return item
     
     def buildHeap(self, alist):
         idx = len(alist)//2
-        self.__size = len(alist)
-        self.__items = [0] + alist
+        self._size = len(alist)
+        self._items = [0] + alist
         while idx > 0:
-            self.__percDown(idx)
+            self._percDown(idx)
             idx -= 1
 
+class TreeNode():
+    def __init__(self, key, value, leftChild=None, rightChild=None, parent=None):
+        self._key = key
+        self._val = value
+        self._leftChild = leftChild
+        self._rightChild = rightChild
+        self._parent = parent
+
+    def hasLeftChild(self):
+        return self._leftChild
+
+    def hasRightChild(self):
+        return self._rightChild
+
+    def isLeftChild(self):
+        return self._parent and self._parent._leftChild == self
+
+    def isRightChild(self):
+        return self._parent and self._parent._rightChild == self
+
+    def isRoot(self):
+        return not self._parent
+
+    def isLeaf(self):
+        return not (self._leftChild or self._rightChild)
+
+    def hasAnyChildren(self):
+        return self._leftChild or self._rightChild
+
+    def hasBothChildren(self):
+        return self._leftChild and self._rightChild
+
+    def replaceNodeData(self, newKey, newValue, newLeftChild, newRightChild):
+        self._key = newKey
+        self._val = newValue
+        self._leftChild = newLeftChild
+        self._rightChild = newRightChild
+        if self.hasLeftChild():
+            self._leftChild.parent = self
+        if self.hasRightChild():
+            self._rightChild.parent = self    
+
+    
 if __name__ == '__main__':
     bh = BinaryHeap()
-    bh.buildHeap([9, 5, 6, 2, 3])
+    bh.buildHeap([9, 5, 6, 2, 3])    
     print(bh.items)
     print(bh.delMin())
     print(bh.delMin())
