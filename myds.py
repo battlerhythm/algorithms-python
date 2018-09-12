@@ -164,10 +164,61 @@ class LinkedList():
             self.head = None
             self.tail = None
 
+class BinaryHeap():
+    def __init__(self):
+        self.items = [0]
+        self.size = 0
+
+    def __percUp(self, idx):
+        while idx//2 > 0:
+            if self.items[idx] < self.items[idx//2]:
+                self.items[idx], self.items[idx//2] = self.items[idx//2], self.items[idx]
+            idx //= 2
+
+    def insert(self, item):
+        self.items.append(item)
+        self.size += 1
+        self.__percUp(self.size)
+
+    def __percDown(self, idx):
+        while idx*2 <= self.size:
+            minIdx = self.__minChild(idx)
+            if self.items[idx] > self.items[minIdx]:
+                self.items[idx], self.items[minIdx] = self.items[minIdx], self.items[idx]
+            idx = minIdx
+
+    def __minChild(self, idx):
+        if idx*2+1 > self.size:
+            return idx*2
+        else:
+            if self.items[idx*2] < self.items[idx*2+1]:
+                return idx*2
+            else:
+                return idx*2+1
+
+    def delMin(self):
+        item = self.items[1]
+        self.items[1] = self.items[self.size]
+        self.size -= 1
+        self.items.pop()
+        self.__percDown(1)
+        return item
+
+    def buildHeap(self, alist):
+        idx = len(alist)//2
+        self.size = len(alist)
+        self.items = [0] + alist
+        while idx > 0:
+            self.__percDown(idx)
+            idx -= 1
+
 if __name__ == '__main__':
-    stk = Stack()
-    stk.push(1)
-    stk.push(2)
-    print(stk)
+    bh = BinaryHeap()
+    bh.buildHeap([9, 5, 6, 2, 3])
+    print(bh.delMin())
+    print(bh.delMin())
+    print(bh.delMin())
+    print(bh.delMin())
+    print(bh.delMin())
 
         
