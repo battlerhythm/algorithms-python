@@ -215,7 +215,7 @@ class BinaryHeap():
 if __name__ == '__main__':
     bh = BinaryHeap()
     bh.buildHeap([9, 5, 6, 2, 3])
-    print(bh.delMin())
+    print(type(bh.delMin()))
     print(bh.delMin())
     print(bh.delMin())
     print(bh.delMin())

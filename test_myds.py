@@ -58,11 +58,11 @@ class TestDsMethods(unittest.TestCase):
 
     def test_BinaryHeap(self):
         self.bh.buildHeap([9, 5, 6, 2, 3])
-        self.assertCountEqual(2, self.bh.delMin())
-        self.assertCountEqual(3, self.bh.delMin())
-        self.assertCountEqual(5, self.bh.delMin())
-        self.assertCountEqual(6, self.bh.delMin())
-        self.assertCountEqual(9, self.bh.delMin())
+        self.assertEqual(2, self.bh.delMin())
+        self.assertEqual(3, self.bh.delMin())
+        self.assertEqual(5, self.bh.delMin())
+        self.assertEqual(6, self.bh.delMin())
+        self.assertEqual(9, self.bh.delMin())
 
 
 if __name__ == '__main__':
