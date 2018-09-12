@@ -51,15 +51,17 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual('[1, 2, 3, 4]', str(self.ll))
         self.assertEqual(2, self.ll.pop(1))
         self.assertEqual(4, self.ll.pop(2))
-        self.assertEqual(2, self.ll.getSize())
+        self.assertEqual(2, self.ll.size)
         self.assertEqual(3, self.ll.pop())
         self.assertEqual(1, self.ll.pop())
         self.assertEqual(True, self.ll.isEmpty())
 
     def test_BinaryHeap(self):
         self.bh.buildHeap([9, 5, 6, 2, 3])
+        self.assertEqual(5, self.bh.size)
         self.assertEqual(2, self.bh.delMin())
         self.assertEqual(3, self.bh.delMin())
+        self.assertEqual(3, self.bh.size)
         self.assertEqual(5, self.bh.delMin())
         self.assertEqual(6, self.bh.delMin())
         self.assertEqual(9, self.bh.delMin())
