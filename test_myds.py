@@ -31,16 +31,16 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual(True, self.q.isEmpty())
 
     def test_Deque(self):
-        self.dq.addFront(1)
-        self.dq.addRear('a')
-        self.dq.addFront(2)
-        self.dq.addRear('b')
-        self.assertEqual('[2, 1, \'a\', \'b\']', str(self.dq))
-        self.assertEqual(4, len(self.dq)) # [2, 1, 'a', 'b']
-        self.assertEqual('b', self.dq.removeRear())
-        self.assertEqual('a', self.dq.removeRear())
-        self.assertEqual(1, self.dq.removeRear())
-        self.assertEqual(2, self.dq.removeFront())
+        self.dq.enqueue(1)
+        self.dq.enqueueLeft('a')
+        self.dq.enqueue(2)
+        self.dq.enqueueLeft('b')
+        self.assertEqual('[\'b\', \'a\', 1, 2]', str(self.dq))
+        self.assertEqual(4, len(self.dq)) # ['b', 'a', 1, 2]
+        self.assertEqual('b', self.dq.dequeue())
+        self.assertEqual('a', self.dq.dequeue())
+        self.assertEqual(2, self.dq.dequeueRight())
+        self.assertEqual(1, self.dq.dequeueRight())
         self.assertEqual(True, self.dq.isEmpty())
 
     def test_LinkedList(self):

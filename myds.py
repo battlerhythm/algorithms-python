@@ -1,4 +1,4 @@
-class Stack():
+class Stack(object):
     def __init__(self):
         self._items = []
 
@@ -20,7 +20,7 @@ class Stack():
     def pop(self):
         return self._items.pop()
 
-class Queue():
+class Queue(object):
     def __init__(self):
         self._items = []
 
@@ -39,30 +39,16 @@ class Queue():
     def dequeue(self):
         return self._items.pop(0)
 
-class Deque():
+class Deque(Queue):
     def __init__(self):
-        self._items = []
+        super().__init__()
 
-    def __str__(self):
-        return str(self._items)
+    def enqueueLeft(self, item):
+        return self._items.insert(0, item)
 
-    def __len__(self):
-        return len(self._items)
-
-    def isEmpty(self):
-        return self._items == []
-
-    def addFront(self, item):
-        self._items.insert(0, item)
-    
-    def addRear(self, item):
-        self._items.append(item)
-
-    def removeFront(self):
-        return self._items.pop(0)
-
-    def removeRear(self):
-        return self._items.pop()
+    def dequeueRight(self):
+        return self._items.pop(-1)
+        
 
 class Node():
     def __init__(self, data):
@@ -357,12 +343,11 @@ class BinarySearchTree():
 
 
 if __name__ == '__main__':
-    bh = BinaryHeap()
-    bh.buildHeap([9, 5, 6, 2, 3])    
-    print(bh.items)
-    print(bh.delMin())
-    print(bh.delMin())
-    print(bh.delMin())
-    print(bh.delMin())
+    dq = Deque()
+    dq.enqueue(1)
+    dq.enqueue(2)
+    print(dq.isEmpty())
+    print(len(dq))
+    print(dq)
 
         
