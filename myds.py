@@ -49,7 +49,6 @@ class Deque(Queue):
     def dequeueRight(self):
         return self._items.pop(-1)
         
-
 class Node():
     def __init__(self, data):
         self._data = data
