@@ -13,20 +13,20 @@ class TestDsMethods(unittest.TestCase):
         self.stk.push('a')
         self.assertEqual('[1, \'a\']', str(self.stk))
         self.assertEqual('a', self.stk.peek())
-        self.assertEqual(2, self.stk.size())
+        self.assertEqual(2, len(self.stk))
         self.assertEqual('a', self.stk.pop())
-        self.assertEqual(1, self.stk.size())
+        self.assertEqual(1, len(self.stk))
         self.assertEqual(False, self.stk.isEmpty())
         self.stk.pop()
         self.assertEqual(True, self.stk.isEmpty())
-        self.assertEqual(0, self.stk.size())
+        self.assertEqual(0, len(self.stk))
 
     def test_Queue(self):
         self.q.enqueue(1)
         self.q.enqueue('a')
-        self.assertEqual(2, self.q.size())
+        self.assertEqual(2, len(self.q))
         self.assertEqual(1, self.q.dequeue())
-        self.assertEqual(1, self.q.size())
+        self.assertEqual(1, len(self.q))
         self.q.dequeue()
         self.assertEqual(True, self.q.isEmpty())
 
@@ -36,7 +36,7 @@ class TestDsMethods(unittest.TestCase):
         self.dq.addFront(2)
         self.dq.addRear('b')
         self.assertEqual('[2, 1, \'a\', \'b\']', str(self.dq))
-        self.assertEqual(4, self.dq.size()) # [2, 1, 'a', 'b']
+        self.assertEqual(4, len(self.dq)) # [2, 1, 'a', 'b']
         self.assertEqual('b', self.dq.removeRear())
         self.assertEqual('a', self.dq.removeRear())
         self.assertEqual(1, self.dq.removeRear())
@@ -51,7 +51,7 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual('[1, 2, 3, 4]', str(self.ll))
         self.assertEqual(2, self.ll.pop(1))
         self.assertEqual(4, self.ll.pop(2))
-        self.assertEqual(2, self.ll.size)
+        self.assertEqual(2, len(self.ll))
         self.assertEqual(3, self.ll.pop())
         self.assertEqual(1, self.ll.pop())
         self.assertEqual(True, self.ll.isEmpty())

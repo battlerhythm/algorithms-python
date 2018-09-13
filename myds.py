@@ -3,13 +3,13 @@ class Stack():
         self._items = []
 
     def __str__(self):
-        return str(self._items)   
+        return str(self._items)  
+
+    def __len__(self):
+        return len(self._items)
 
     def isEmpty(self):
         return self._items == []
-
-    def size(self):
-        return len(self._items)
 
     def push(self, item):
         self._items.append(item)
@@ -27,11 +27,11 @@ class Queue():
     def __str__(self):
         return str(self._items)
 
+    def __len__(self):
+        return len(self._items)
+
     def isEmpty(self):
         return self._items == []
-
-    def size(self):
-        return len(self._items)
 
     def enqueue(self, item):
         self._items.append(item)
@@ -46,11 +46,11 @@ class Deque():
     def __str__(self):
         return str(self._items)
 
+    def __len__(self):
+        return len(self._items)
+
     def isEmpty(self):
         return self._items == []
-
-    def size(self):
-        return len(self._items)
 
     def addFront(self, item):
         self._items.insert(0, item)
@@ -73,8 +73,8 @@ class Node():
     def __str__(self):
         string = "currentNode: {data}\t prevNode: {prevNode}\t nextNode: {nextNode}\n".format(
             data=self._data,
-            prevNode=self.prevNode.data if self.prevNode is not None else "None",
-            nextNode=self.nextNode.data if self.nextNode is not None else "None"
+            prevNode=self._prevNode.data if self._prevNode is not None else "None",
+            nextNode=self._nextNode.data if self._nextNode is not None else "None"
         )
         return string
 
@@ -122,13 +122,11 @@ class LinkedList():
             alist.append(node.data)
         return str(alist)
 
+    def __len__(self):
+        return self._size
+
     def isEmpty(self):
         return self._head == None and self._tail == None
-
-    @property
-    def size(self):
-        """Return the size of the LikedList"""
-        return self._size
 
     def append(self, item):
         newNode = Node(item)
