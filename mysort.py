@@ -67,15 +67,15 @@ class MergeSort():
 class QuickSort():
     @classmethod
     def sort(cls, alist):
-        cls._sortHelper(alist, 0, len(alist)-1)
+        cls._sort(alist, 0, len(alist)-1)
         return alist
 
     @classmethod
-    def _sortHelper(cls, alist, start, end):
+    def _sort(cls, alist, start, end):
         if start < end:
             pivot = cls._partition(alist, start, end)
-            cls._sortHelper(alist, start, pivot-1)
-            cls._sortHelper(alist, pivot+1, end)
+            cls._sort(alist, start, pivot-1)
+            cls._sort(alist, pivot+1, end)
         return alist
 
     @classmethod
