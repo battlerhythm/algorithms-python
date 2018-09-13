@@ -340,7 +340,6 @@ class BinarySearchTree():
         else:
             return self._get(key, theNode.rightChild)
 
-
 if __name__ == '__main__':
     dq = Deque()
     dq.enqueue(1)
