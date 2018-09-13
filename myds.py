@@ -160,7 +160,7 @@ class LinkedList():
         return theNode
     
     def _remove(self, item):
-        if item.nextNode and item.prevNode:             # for itmes in middle
+        if item.nextNode and item.prevNode:             # for items in middle
             item.nextNode.prevNode = item.prevNode
             item.prevNode.nextNode = item.nextNode
         elif item.nextNode:                             # for index 0
@@ -178,8 +178,7 @@ class BinaryHeap():
         self._items = [0]
         self._size = 0
 
-    @property
-    def size(self):
+    def __len__(self):
         return self._size
 
     @property
@@ -215,7 +214,7 @@ class BinaryHeap():
 
     def delMin(self):
         item = self._items[1]
-        self._items[1] = self._items[self.size]
+        self._items[1] = self._items[self._size]
         self._size -= 1
         self._items.pop()
         self._percDown(1)
@@ -237,17 +236,35 @@ class TreeNode():
         self._rightChild = rightChild
         self._parent = parent
 
-    def hasLeftChild(self):
+    @property
+    def parent(self):
+        return self._parent
+
+    @parent.setter
+    def parent(self, newTreeNode):
+        self._partent = newTreeNode
+
+    @property
+    def leftChild(self):
         return self._leftChild
 
-    def hasRightChild(self):
+    @leftChild.setter
+    def leftChild(self, newTreeNode):
+        self._leftChild = newTreeNode
+
+    @property
+    def rightChild(self):
         return self._rightChild
 
+    @rightChild.setter
+    def rightChild(self, newTreeNode):
+        self._rightChild = newTreeNode
+
     def isLeftChild(self):
-        return self._parent and self._parent._leftChild == self
+        return self._parent and self._parent.leftChild == self
 
     def isRightChild(self):
-        return self._parent and self._parent._rightChild == self
+        return self._parent and self._parent.rightChild == self
 
     def isRoot(self):
         return not self._parent
@@ -266,11 +283,10 @@ class TreeNode():
         self._val = newValue
         self._leftChild = newLeftChild
         self._rightChild = newRightChild
-        if self.hasLeftChild():
+        if self._leftChild:
             self._leftChild.parent = self
-        if self.hasRightChild():
-            self._rightChild.parent = self    
-
+        if self._rightChild:
+            self._rightChild.parent = self
     
 if __name__ == '__main__':
     bh = BinaryHeap()
