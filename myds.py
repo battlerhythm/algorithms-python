@@ -231,10 +231,18 @@ class BinaryHeap():
 class TreeNode():
     def __init__(self, key, value, leftChild=None, rightChild=None, parent=None):
         self._key = key
-        self._val = value
+        self._value = value
         self._leftChild = leftChild
         self._rightChild = rightChild
         self._parent = parent
+
+    @property
+    def key(self):
+        return self._key
+
+    @property
+    def value(self):
+        return self._value
 
     @property
     def parent(self):
@@ -280,7 +288,7 @@ class TreeNode():
 
     def replaceNodeData(self, newKey, newValue, newLeftChild, newRightChild):
         self._key = newKey
-        self._val = newValue
+        self._value = newValue
         self._leftChild = newLeftChild
         self._rightChild = newRightChild
         if self._leftChild:
@@ -288,6 +296,66 @@ class TreeNode():
         if self._rightChild:
             self._rightChild.parent = self
     
+class BinarySearchTree():
+    def __init__(self):
+        self._root = None
+        self._size = 0
+
+    def __len__(self):
+        return self._size
+
+    def __setitem__(self, k, v):
+        self.put(k, v)
+
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __contains__(self, key):
+        if self._get(key, self._root):
+            return True
+        else:
+            return False
+
+    def put(self, key, value):
+        if self._root:
+            self._put(key, value, self._root)
+        else:
+            self._root = TreeNode(key, value)
+        self._size += 1
+
+    def _put(self, key, value, theNode):
+        if key < theNode.key:
+            if theNode.leftChild:
+                self._put(key, value, theNode.leftChild)
+            else:
+                theNode.leftChild = TreeNode(key, value, parent=theNode)
+        else:
+            if theNode.rightChild:
+                self._put(key, value, theNode.rightChild)
+            else:
+                theNode.rightChild = TreeNode(key, value, parent=theNode)
+
+    def get(self, key):
+        if self._root:
+            res = self._get(key, self._root)
+            if res:
+                return res.value
+            else:
+                return None
+        else:
+            return None
+
+    def _get(self, key, theNode):
+        if not theNode:
+            return None
+        elif theNode.key == key:
+            return theNode
+        elif key < theNode.key:
+            return self._get(key, theNode.leftChild)
+        else:
+            return self._get(key, theNode.rightChild)
+
+
 if __name__ == '__main__':
     bh = BinaryHeap()
     bh.buildHeap([9, 5, 6, 2, 3])    
