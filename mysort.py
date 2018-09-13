@@ -1,5 +1,6 @@
 class BubbleSort():
-    def sort(self, alist):
+    @classmethod
+    def sort(cls, alist):
         loopCount = len(alist)-1
         while loopCount != 0:
             for i in range(len(alist)-1):
@@ -9,7 +10,8 @@ class BubbleSort():
         return alist
 
 class InsertionSort():
-    def sort(self, alist):
+    @classmethod
+    def sort(cls, alist):
         i = 0
         while i < len(alist)-1:
             j = i
@@ -20,7 +22,8 @@ class InsertionSort():
         return alist
 
 class SelectionSort():
-    def sort(self, alist):
+    @classmethod
+    def sort(cls, alist):
         ptr = 0
         minVal = None 
         while ptr < len(alist):
@@ -33,16 +36,18 @@ class SelectionSort():
         return alist
 
 class MergeSort():
-    def sort(self, alist):
+    @classmethod
+    def sort(cls, alist):
         if len(alist) <= 1:
             return alist
         left = alist[:len(alist)//2]
         right = alist[len(alist)//2:]
-        left = self.sort(left)
-        right = self.sort(right)
-        return self.__merge(left, right)
+        left = cls.sort(left)
+        right = cls.sort(right)
+        return cls._merge(left, right)
 
-    def __merge(self, left, right):
+    @classmethod
+    def _merge(cls, left, right):
         result = []
         while left and right:
             if left[0] <= right[0]:
@@ -60,18 +65,21 @@ class MergeSort():
         return result 
 
 class QuickSort():
-    def sort(self, alist):
-        self.__sortHelper(alist, 0, len(alist)-1)
-        return alist
-            
-    def __sortHelper(self, alist, start, end):
-        if start < end:
-            pivot = self.__partition(alist, start, end)
-            self.__sortHelper(alist, start, pivot-1)
-            self.__sortHelper(alist, pivot+1, end)
+    @classmethod
+    def sort(cls, alist):
+        cls._sortHelper(alist, 0, len(alist)-1)
         return alist
 
-    def __partition(self, alist, start, end):
+    @classmethod
+    def _sortHelper(cls, alist, start, end):
+        if start < end:
+            pivot = cls._partition(alist, start, end)
+            cls._sortHelper(alist, start, pivot-1)
+            cls._sortHelper(alist, pivot+1, end)
+        return alist
+
+    @classmethod
+    def _partition(cls, alist, start, end):
         pivot = end
         wall = start
         left = start
