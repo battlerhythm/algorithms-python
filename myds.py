@@ -235,7 +235,7 @@ class TreeNode():
 
     @parent.setter
     def parent(self, newTreeNode):
-        self._partent = newTreeNode
+        self._parent = newTreeNode
 
     @property
     def leftChild(self):
@@ -301,6 +301,9 @@ class BinarySearchTree():
         else:
             return False
 
+    def __delitem__(self, key):
+        self.delete(key)
+
     def put(self, key, value):
         if self._root:
             self._put(key, value, self._root)
@@ -322,13 +325,13 @@ class BinarySearchTree():
 
     def get(self, key):
         if self._root:
-            res = self._get(key, self._root)
-            if res:
-                return res.value
+            node = self._get(key, self._root)
+            if node:
+                return node.value
             else:
-                return None
+                raise KeyError
         else:
-            return None
+            raise KeyError
 
     def _get(self, key, theNode):
         if not theNode:
@@ -340,12 +343,113 @@ class BinarySearchTree():
         else:
             return self._get(key, theNode.rightChild)
 
+    def delete(self, key):
+        if self._size > 1:
+            nodeToRemove = self._get(key, self._root)
+            if nodeToRemove:
+                self._remove(nodeToRemove)
+                self._size -= 1
+            else:
+                raise KeyError
+        elif self._size == 1 and self._root.key == key:
+            self._root = None
+            self._size -= 1
+        else:
+            raise KeyError
+        
+    def _remove(self, theNode):
+        if theNode.isLeaf(): # Leaf
+            if theNode == theNode.parent.leftChild:
+                theNode.parent.leftChild = None
+            else:
+                theNode.parent.rightChild = None
+        elif theNode.hasBothChildren(): # Interior Node that has two child
+            successor = self._findSuccessor(theNode)
+            self._spliceOut(successor)
+            theNode.key, theNode.value = successor.key, successor.value
+        else: # Node, which has one child
+            if theNode.leftChild:
+                if theNode.isLeftChild():
+                    theNode.leftChild.parent = theNode.parent
+                    theNode.parent.leftChild = theNode.leftChild
+                elif theNode.isRightChild():
+                    theNode.leftChild.parent = theNode.parent
+                    theNode.parent.rightChild = theNode.leftChild
+                else:
+                    theNode.replaceNodeData(
+                        theNode.leftChild.key,
+                        theNode.leftChild.value,
+                        theNode.leftChild.leftChild,
+                        theNode.leftChild.rightChild
+                    )
+            else:
+                if theNode.isLeftChild():
+                    theNode.rightChild.parent = theNode.parent
+                    theNode.parent.leftChild = theNode.rightChild
+                elif theNode.isRightChild():
+                    theNode.rightChild.parent = theNode.parent
+                    theNode.parent.rightChild = theNode.rightChild
+                else:
+                    theNode.replaceNodeData(
+                        theNode.rightChild.key,
+                        theNode.rightChild.value,
+                        theNode.rightChild.leftChild,
+                        theNode.rightChild.RightChild
+                    )
+
+    def _spliceOut(self, theNode):
+        if theNode.isLeaf():
+            if theNode.isLeftChild():
+                theNode.parent.leftChild = None
+            else:
+                theNode.parent.rightChild = None
+        else: # if theNode has any children
+            if theNode.leftChild:
+                if theNode.isLeftChild():
+                    theNode.parent.leftChild = theNode.leftChild
+                else:
+                    theNode.parent.rightChild = theNode.leftChild
+                theNode.leftChild.parent = theNode.parent
+            else:
+                if theNode.isLeftChild():
+                    theNode.parent.leftChild = theNode.rightChild
+                else:
+                    theNode.parent.rightChild = theNode.rightChild
+                theNode.rightChild.parent = theNode.parent
+
+    def _findSuccessor(self, theNode):
+        successor = None
+        if theNode.rightChild:
+            successor = self._findMinChild(theNode.rightChild)
+        else:
+            if theNode.parent:
+                if theNode.isLeftChild():
+                    successor = theNode.parent
+                else:
+                    theNode.parent.rightChild = None
+                    successor = self._findSuccessor(theNode.parent)
+                    theNode.parent.rightChild = theNode
+        return successor              
+    
+    def _findMinChild(self, theNode):
+        minChild = theNode
+        while theNode.leftChild:
+            minChild = minChild.leftChild
+        return minChild
+
 if __name__ == '__main__':
-    dq = Deque()
-    dq.enqueue(1)
-    dq.enqueue(2)
-    print(dq.isEmpty())
-    print(len(dq))
-    print(dq)
+    bst = BinarySearchTree()
+    bst[1] = "One"
+    bst[2] = "Two"
+    bst[3] = "Three"
+
+    bst.put(4, "Four")
+    print(bst.get(2))
+    print(bst[3])
+
+    del bst[3]
+
+    print(bst[3])
+
 
         
