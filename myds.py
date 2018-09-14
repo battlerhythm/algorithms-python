@@ -437,19 +437,4 @@ class BinarySearchTree():
             minChild = minChild.leftChild
         return minChild
 
-if __name__ == '__main__':
-    bst = BinarySearchTree()
-    bst[1] = "One"
-    bst[2] = "Two"
-    bst[3] = "Three"
-
-    bst.put(4, "Four")
-    print(bst.get(2))
-    print(bst[3])
-
-    del bst[3]
-
-    print(bst[3])
-
-
         

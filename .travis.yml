@@ -5,9 +5,22 @@ python:
   - "3.6"
   - "3.6-dev"  # 3.6 development branch
   - "3.7-dev"  # 3.7 development branch
+env:
+  global:
+    - CC_TEST_REPORTER_ID=2510c3a6fc25b3468c8571bce0afd8a76de1af91627a1f4c6227cd9166bd12d5
+
 # command to install dependencies
-# install:
-  # - pip install -r requirements.txt
+install:
+  - pip install coverage
 # command to run tests
+before_script:  # code coverage tool
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
-  - pytest
+  - coverage run test_myds.py
+after_script:
+  - coverage xml
+
+
+
