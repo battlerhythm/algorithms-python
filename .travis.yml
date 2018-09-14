@@ -19,6 +19,7 @@ script:
   - coverage run test_myds.py
 after_script:
   - coverage xml
+  - ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
 
 
