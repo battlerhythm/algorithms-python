@@ -55,14 +55,6 @@ class Node():
         self._nextNode = None
         self._prevNode = None
 
-    def __str__(self):
-        string = "currentNode: {data}\t prevNode: {prevNode}\t nextNode: {nextNode}\n".format(
-            data=self._data,
-            prevNode=self._prevNode.data if self._prevNode is not None else "None",
-            nextNode=self._nextNode.data if self._nextNode is not None else "None"
-        )
-        return string
-
     @property
     def data(self):
         """Return the data in the node"""
@@ -77,10 +69,6 @@ class Node():
     def prevNode(self):
         """Return the previous node of the Node"""
         return self._prevNode
-
-    @data.setter
-    def data(self, newData):
-        self._data = newData
   
     @nextNode.setter
     def nextNode(self, newNextNode):
@@ -99,7 +87,7 @@ class LinkedList():
     def __str__(self):
         alist = []
         if self._size is 0:
-            return alist
+            return str(alist)
         node = self._head
         alist.append(node.data)
         for _ in range(self._size-1): # O(n)
@@ -394,7 +382,7 @@ class BinarySearchTree():
                         theNode.rightChild.key,
                         theNode.rightChild.value,
                         theNode.rightChild.leftChild,
-                        theNode.rightChild.RightChild
+                        theNode.rightChild.rightChild
                     )
 
     def _spliceOut(self, theNode):

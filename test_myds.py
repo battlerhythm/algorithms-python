@@ -53,6 +53,8 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual(3, ll.pop())
         self.assertEqual(1, ll.pop())
         self.assertEqual(True, ll.isEmpty())
+        self.assertEqual('[]', str(ll))
+        with self.assertRaises(IndexError): ll.pop()
 
     def test_BinaryHeap(self):
         bh = BinaryHeap()
@@ -62,9 +64,13 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual(2, bh.delMin())
         self.assertEqual(3, bh.delMin())
         self.assertEqual(3, len(bh))
+        bh.insert(4)
+        self.assertEqual(4, len(bh))
+        self.assertEqual(4, bh.delMin())
         self.assertEqual(5, bh.delMin())
         self.assertEqual(6, bh.delMin())
         self.assertEqual(9, bh.delMin())
+
 
     def test_BinarySearchTree(self):
         bst = BinarySearchTree()
@@ -73,6 +79,21 @@ class TestDsMethods(unittest.TestCase):
         bst[3] = 3
         self.assertEqual(3, bst[3])
         self.assertEqual(3, len(bst))
+        del bst[3]
+        with self.assertRaises(KeyError): del bst[3]
+        self.assertEqual(2, len(bst))
+        self.assertEqual(False, 3 in bst)
+        self.assertEqual(True, 2 in bst)
+        bst[4] = 4
+        bst[7] = 7
+        bst[5] = 5
+        bst[6] = 6
+        self.assertEqual(6, len(bst))
+        with self.assertRaises(KeyError): bst[3]
+        self.assertEqual(7, bst[7])
+        del bst[1], bst[2], bst[4]
+        self.assertEqual(3, len(bst))
+        del bst[5], bst[6], bst[7]
 
 if __name__ == '__main__':
     unittest.main()
