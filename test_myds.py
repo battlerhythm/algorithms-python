@@ -71,7 +71,6 @@ class TestDsMethods(unittest.TestCase):
         self.assertEqual(6, bh.delMin())
         self.assertEqual(9, bh.delMin())
 
-
     def test_BinarySearchTree(self):
         bst = BinarySearchTree()
         bst[1] = 1
