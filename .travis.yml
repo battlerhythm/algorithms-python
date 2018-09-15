@@ -16,6 +16,7 @@ before_script:  # code coverage tool
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
+  - coverage run test_mysort.py
   - coverage run test_myds.py
 after_script:
   - coverage xml
