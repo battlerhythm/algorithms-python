@@ -16,8 +16,7 @@ before_script:  # code coverage tool
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - coverage run --omit=test_myds.py test_mysort.py
-  - coverage run --omit=test_myds.py test_myds.py 
+  - coverage run --omit=test_myds.py, test_my_sort.py test.py
 after_script:
   - coverage xml
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

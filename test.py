@@ -1,7 +1,40 @@
 import unittest
+import cProfile
+from mysort import BubbleSort, InsertionSort, SelectionSort, MergeSort, QuickSort
 from myds import Stack, Queue, Deque, LinkedList, BinaryHeap, BinarySearchTree
 
-class TestDsMethods(unittest.TestCase):
+class TestSortMethods(unittest.TestCase):
+    def test_BubbleSort(self):
+        alist1 = [4, 3, 2, 1, 0]
+        alist2 = [0, 1, 4, 3, 2]
+        self.assertEqual(BubbleSort.sort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(BubbleSort.sort(alist2), [0, 1, 2, 3, 4])
+
+    def test_InsertionSort(self):
+        alist1 = [4, 3, 2, 1, 0]
+        alist2 = [0, 1, 4, 3, 2]
+        self.assertEqual(InsertionSort.sort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(InsertionSort.sort(alist2), [0, 1, 2, 3, 4])
+
+    def test_SelectionSort(self):
+        alist1 = [4, 3, 2, 1, 0]
+        alist2 = [0, 1, 4, 3, 2]
+        self.assertEqual(SelectionSort.sort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(SelectionSort.sort(alist2), [0, 1, 2, 3, 4])
+
+    def test_MergeSort(self):
+        alist1 = [4, 3, 2, 1, 0]
+        alist2 = [0, 1, 4, 3, 2]
+        self.assertEqual(MergeSort.sort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(MergeSort.sort(alist2), [0, 1, 2, 3, 4])
+
+    def test_QuickSort(self):
+        alist1 = [4, 3, 2, 1, 0]
+        alist2 = [0, 1, 4, 3, 2]
+        self.assertEqual(QuickSort.sort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(QuickSort.sort(alist2), [0, 1, 2, 3, 4])
+
+class TestDSMethods(unittest.TestCase):
     def test_Stack(self):
         stk = Stack()
         stk.push(1)
@@ -96,3 +129,5 @@ class TestDsMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    cProfile.run('unittest.main()')
+    
