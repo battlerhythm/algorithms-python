@@ -49,7 +49,7 @@ class Deque(Queue):
     def dequeueRight(self):
         return self._items.pop(-1)
         
-class Node():
+class Node(object):
     def __init__(self, data):
         self._data = data
         self._nextNode = None
@@ -78,7 +78,7 @@ class Node():
     def prevNode(self, newPrevNode):
         self._prevNode = newPrevNode
 
-class LinkedList():
+class LinkedList(object):
     def __init__(self):
         self._head = None
         self._tail = None
@@ -146,7 +146,7 @@ class LinkedList():
             self._head = None
             self._tail = None
 
-class BinaryHeap():
+class BinaryHeap(object):
     def __init__(self):
         self._items = [0]
         self._size = 0
@@ -201,7 +201,7 @@ class BinaryHeap():
             self._percDown(idx)
             idx -= 1
 
-class TreeNode():
+class TreeNode(object):
     def __init__(self, key, value, leftChild=None, rightChild=None, parent=None):
         self._key = key
         self._value = value
@@ -269,7 +269,7 @@ class TreeNode():
         if self._rightChild:
             self._rightChild.parent = self
     
-class BinarySearchTree():
+class BinarySearchTree(object):
     def __init__(self):
         self._root = None
         self._size = 0
@@ -424,5 +424,4 @@ class BinarySearchTree():
         while theNode.leftChild:
             minChild = minChild.leftChild
         return minChild
-
-        
+    

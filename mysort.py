@@ -1,4 +1,4 @@
-class BubbleSort():
+class BubbleSort(object):
     @classmethod
     def sort(cls, alist):
         loopCount = len(alist)-1
@@ -9,7 +9,7 @@ class BubbleSort():
             loopCount -= 1
         return alist
 
-class InsertionSort():
+class InsertionSort(object):
     @classmethod
     def sort(cls, alist):
         i = 0
@@ -21,7 +21,7 @@ class InsertionSort():
             i += 1
         return alist
 
-class SelectionSort():
+class SelectionSort(object):
     @classmethod
     def sort(cls, alist):
         ptr = 0
@@ -35,7 +35,7 @@ class SelectionSort():
             ptr += 1
         return alist
 
-class MergeSort():
+class MergeSort(object):
     @classmethod
     def sort(cls, alist):
         if len(alist) <= 1:
@@ -64,7 +64,7 @@ class MergeSort():
             del right[0]
         return result 
 
-class QuickSort():
+class QuickSort(object):
     @classmethod
     def sort(cls, alist):
         cls._sort(alist, 0, len(alist)-1)
