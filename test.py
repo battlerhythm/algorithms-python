@@ -1,7 +1,7 @@
 import unittest
 import cProfile
 from mysort import BubbleSort, InsertionSort, SelectionSort, MergeSort, QuickSort
-from myds import Stack, Queue, Deque, LinkedList, BinaryHeap, BinarySearchTree
+from myds import Stack, Queue, Deque, LinkedList, BinaryHeap, BinarySearchTree, AvlTree
 
 class TestSortMethods(unittest.TestCase):
     def test_BubbleSort(self):
@@ -126,6 +126,23 @@ class TestDSMethods(unittest.TestCase):
         del bst[1], bst[2], bst[4]
         self.assertEqual(3, len(bst))
         del bst[5], bst[6], bst[7]
+
+    def test_AvlTree(self):
+        avl = AvlTree()
+        avl[1] = 1
+        avl[2] = 2
+        avl[3] = 3
+        avl[4] = 4
+        avl[5] = 5
+        self.assertEqual(5, len(avl))
+        self.assertEqual(2, avl[2])
+        avl[-1] = -1
+        avl[-2] = -2
+        avl[-3] = -3
+        avl[-4] = -4
+        avl[-5] = -5
+        self.assertEqual(10, len(avl))
+        self.assertEqual(-3, avl[-3])
 
 if __name__ == '__main__':
     unittest.main()

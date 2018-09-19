@@ -208,6 +208,7 @@ class TreeNode(object):
         self._leftChild = leftChild
         self._rightChild = rightChild
         self._parent = parent
+        self._balanceFactor = 0
 
     @property
     def key(self):
@@ -241,6 +242,14 @@ class TreeNode(object):
     def rightChild(self, newTreeNode):
         self._rightChild = newTreeNode
 
+    @property
+    def balanceFactor(self):
+        return self._balanceFactor
+
+    @balanceFactor.setter
+    def balanceFactor(self, newBalanceFactor):
+        self._balanceFactor = newBalanceFactor
+
     def isLeftChild(self):
         return self._parent and self._parent.leftChild == self
 
@@ -252,6 +261,12 @@ class TreeNode(object):
 
     def isLeaf(self):
         return not (self._leftChild or self._rightChild)
+
+    # def hasLeftChild(self):
+    #     return self._leftChild
+    
+    # def hasRightChild(self):
+    #     return self._rightChild
 
     def hasAnyChildren(self):
         return self._leftChild or self._rightChild
@@ -291,6 +306,22 @@ class BinarySearchTree(object):
 
     def __delitem__(self, key):
         self.delete(key)
+
+    @property
+    def root(self):
+        return self._root
+
+    @root.setter
+    def root(self, theNode):
+        self._root = theNode
+
+    @property
+    def size(self):
+        return self._size
+
+    @size.setter
+    def size(self, newSize):
+        self._size = newSize
 
     def put(self, key, value):
         if self._root:
@@ -425,3 +456,80 @@ class BinarySearchTree(object):
             minChild = minChild.leftChild
         return minChild
     
+class AvlTree(BinarySearchTree):
+    def _put(self, key, value, theNode):
+        if key < theNode.key:
+            if theNode.leftChild:
+                self._put(key, value, theNode.leftChild)
+            else:
+                theNode.leftChild = TreeNode(key, value, parent=theNode)
+                self.updateBalance(theNode.leftChild)
+        else:
+            if theNode.rightChild:
+                self._put(key, value, theNode.rightChild)
+            else:
+                theNode.rightChild = TreeNode(key, value, parent=theNode)
+                self.updateBalance(theNode.rightChild)
+
+    def updateBalance(self, theNode):
+        if theNode.balanceFactor > 1 or theNode.balanceFactor < -1:
+            self.rebalance(theNode)
+            return
+        if theNode.parent != None:
+            if theNode.isLeftChild():
+                theNode.parent.balanceFactor += 1
+            elif theNode.isRightChild():
+                theNode.parent.balanceFactor -= 1
+            
+            if theNode.parent.balanceFactor != 0:
+                self.updateBalance(theNode.parent)
+
+    def rotateLeft(self, root):
+        newRoot = root.rightChild
+        root.rightChild = newRoot.leftChild
+        if newRoot.leftChild != None:
+            newRoot.leftChild.parent = root
+        newRoot.parent = root.parent
+        if root.isRoot():
+            self.root = newRoot
+        else:
+            if root.isLeftChild():
+                root.parent.leftChild = newRoot
+            else:
+                root.parent.rightChild = newRoot
+        newRoot.leftChild = root
+        root.parent = newRoot
+        root.balanceFactor = root.balanceFactor + 1 - min(newRoot.balanceFactor, 0)
+        newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(root.balanceFactor, 0)
+
+    def rotateRight(self, root):
+        newRoot = root.leftChild
+        root.leftChild = newRoot.rightChild
+        if newRoot.rightChild != None:
+            newRoot.rightChild.parent = root
+        newRoot.parent = root.parent
+        if root.isRoot():
+            self.root = newRoot
+        else:
+            if root.isRightChild():
+                root.parent.rightChild = newRoot
+            else:
+                root.parent.leftChild = newRoot
+            newRoot.rightChild = root
+            root.parent = newRoot
+            root.balanceFactor = root.balanceFactor - 1 - max(newRoot.balanceFactor, 0)
+            newRoot.balanceFactor = newRoot.balanceFactor - 1 + min(root.balanceFactor, 0)
+
+    def rebalance(self, theNode):
+        if theNode.balanceFactor < 0:
+            if theNode.rightChild.balanceFactor > 0:
+                self.rotateRight(theNode.rightChild)
+                self.rotateLeft(theNode)
+            else:
+                self.rotateLeft(theNode)
+        elif theNode.balanceFactor > 0:
+            if theNode.leftChild.balanceFactor < 0:
+                self.rotateLeft(theNode.leftChild)
+                self.rotateRight(theNode)
+            else:
+                self.rotateRight(theNode)
