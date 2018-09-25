@@ -1,5 +1,3 @@
-
-
 class Vertex(object):
     def __init__(self, key):
         self._id = key

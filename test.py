@@ -1,9 +1,9 @@
 import unittest
 import cProfile
-from mysort import BubbleSort, InsertionSort, SelectionSort, MergeSort, QuickSort
-from myds import Stack, Queue, Deque, LinkedList, BinaryHeap
-from mytree import BinarySearchTree, AvlTree
-from mygraphs import Graph
+from myds.sort import BubbleSort, InsertionSort, SelectionSort, MergeSort, QuickSort
+from myds.basic import Stack, Queue, Deque, LinkedList, BinaryHeap
+from myds.tree import BinarySearchTree, AvlTree
+from myds.graph import Graph
 
 class TestSortMethods(unittest.TestCase):
     def test_BubbleSort(self):
