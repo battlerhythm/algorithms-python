@@ -3,28 +3,32 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4fb374abbeed989cf02d/maintainability)](https://codeclimate.com/github/battlerhythm/algorithms/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4fb374abbeed989cf02d/test_coverage)](https://codeclimate.com/github/battlerhythm/algorithms/test_coverage)
 
-Re-writing Algorithms and Data Structures in Python. Not finished, Being updated (almost)everyday :)
+Re-writing Algorithms and Data Structures in Python. Being updated.
 
 ## Sorting algorithms: myds/sort.py
-  - BubbleSort
-  - InsertionSort
-  - SelectionSort
-  - MergeSort
-  - QuickSort
+
+- BubbleSort
+- InsertionSort
+- SelectionSort
+- MergeSort
+- QuickSort
   
 ## Basic Data Structures: myds/basic.py
-  - Stack
-  - Queue
-  - Deque
-  - Node
-  - LinkedList
-  - BinaryHeap
+
+- Stack
+- Queue
+- Deque
+- Node
+- LinkedList
+- BinaryHeap
   
 ## Trees: myds/tree.py
-  - TreeNode
-  - BinarySearchTree
-  - AvlTree
+
+- TreeNode
+- BinarySearchTree
+- AvlTree
   
 ## Graphs: myds/graph.py
-  - Vertex
-  - Graph
+
+- Vertex
+- Graph
