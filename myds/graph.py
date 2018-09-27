@@ -34,7 +34,7 @@ class Vertex(object):
             if newValue > 0:
                 self._dist = newValue
         else:
-            raise TypeError("Should be positive interger include zero")
+            raise TypeError('Should be positive interger include zero')
 
     @property
     def color(self):
@@ -97,7 +97,7 @@ class Graph(object):
 
     def buildGraph(self, fileName):
         dct = {}
-        with open(fileName, 'r') as f:
+        with open(fileName, 'r') as f: 
             for line in f:
                 word = line[:-1]
                 for i in range(len(word)):
