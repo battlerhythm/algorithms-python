@@ -1,8 +1,8 @@
 import unittest
 import cProfile
 from myds.sort import bubbleSort, insertionSort, selectionSort, mergeSort, quickSort
-from myds.basic import Stack, Queue, Deque, LinkedList, BinaryHeap
-from myds.tree import BinarySearchTree, AvlTree
+from myds.basic import Stack, Queue, Deque, LinkedList
+from myds.tree import BinaryHeap, BinarySearchTree, AvlTree
 from myds.graph import Graph
 
 class TestSortMethods(unittest.TestCase):

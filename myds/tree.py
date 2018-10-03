@@ -1,3 +1,58 @@
+class BinaryHeap(object):
+    def __init__(self):
+        self._items = [0]
+        self._size = 0
+
+    def __len__(self):
+        return self._size
+
+    @property
+    def items(self):
+        return self._items[1:]
+
+    def _percUp(self, idx):
+        while idx//2 > 0:
+            if self._items[idx] < self._items[idx//2]:
+                self._items[idx], self._items[idx//2] = self._items[idx//2], self._items[idx]
+            idx //= 2
+
+    def insert(self, item):
+        self._items.append(item)
+        self._size += 1
+        self._percUp(self._size)
+
+    def _percDown(self, idx):
+        while idx*2 <= self._size:
+            minIdx = self._minChild(idx)
+            if self._items[idx] > self._items[minIdx]:
+                self._items[idx], self._items[minIdx] = self._items[minIdx], self._items[idx]
+            idx = minIdx
+
+    def _minChild(self, idx):
+        if idx*2+1 > self._size:
+            return idx*2
+        else:
+            if self._items[idx*2] < self._items[idx*2+1]:
+                return idx*2
+            else:
+                return idx*2+1
+
+    def delMin(self):
+        item = self._items[1]
+        self._items[1] = self._items[self._size]
+        self._size -= 1
+        self._items.pop()
+        self._percDown(1)
+        return item
+    
+    def buildHeap(self, alist):
+        idx = len(alist)//2
+        self._size = len(alist)
+        self._items = [0] + alist
+        while idx > 0:
+            self._percDown(idx)
+            idx -= 1
+
 class TreeNode(object):
     def __init__(self, key, value, leftChild=None, rightChild=None, parent=None):
         self._key = key
