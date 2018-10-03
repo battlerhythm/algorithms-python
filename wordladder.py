@@ -1,6 +1,6 @@
-from myds.graph import Graph
+from myds.graph import BFSGraph
 
-grf = Graph()
+grf = BFSGraph()
 grf.buildGraph('fourletterwords.txt')
 grf.bfs('FOOL')
 print(grf.traverse('SAGE'))

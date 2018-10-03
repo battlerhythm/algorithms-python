@@ -8,6 +8,8 @@ class Vertex(object):
         self._dist = sys.maxsize
         self._predecessor = None
         self._color = 'white'
+        self._discovery = 0 # Need getter and setter
+        self._finish = 0 # Need getter and setter
 
     def __str__(self):
         return str(self._id) + ' connectedTo: ' + str([x.id for x in self._connectedTo])
@@ -61,6 +63,9 @@ class Graph(object):
     def __contains__(self, vertex):
         return vertex in self._vrtxList
 
+    def __iter__(self):
+        return iter(self._vrtxList.values())
+
     @property
     def size(self):
         return len(self.vertices), len(self.edges)
@@ -112,6 +117,20 @@ class Graph(object):
                     if word1 != word2:
                         self.addEdge(word1, word2)
 
+    def traverse(self, endId):
+        vertices = []
+        vertex = self.getVertex(endId)
+        while True:
+            vertices.append(vertex.id)
+            if vertex.predecessor == None:
+                break
+            vertex = vertex.predecessor
+        return vertices
+
+class BFSGraph(Graph):
+    def __init__(self):
+        super().__init__()
+
     def bfs(self, startId):
         start = self.getVertex(startId)
         start.distance = 0
@@ -128,16 +147,37 @@ class Graph(object):
                     vertQ.enqueue(neighbor)
             currentVert.color = 'black'
 
-    def traverse(self, endId):
-        vertices = []
-        vertex = self.getVertex(endId)
-        while True:
-            vertices.append(vertex.id)
-            if vertex.predecessor == None:
-                break
-            vertex = vertex.predecessor
-        return vertices
-            
+
+class DFSGraph(Graph):
+    def __init__(self):
+        super().__init__()
+        self._time = 0
+
+    def dfs(self):
+        for vertex in self:
+            vertex.color = 'white'
+            vertex.predecessor = -1
+        for vertex in self:
+            if vertex.color == 'white':
+                self._visited(vertex)
+
+    def _visited(self, vertex):
+        vertex.color = 'gray'
+        self._time += 1
+
+        # Need to implement
+        vertex.setDiscovery(self._time)
+
+        for nextVert in vertex.neighbors:
+            if nextVert.color == 'white':
+                nextVert.predecessor = vertex
+                self._visited(nextVert)
+        vertex.color = 'black'
+        self._time += 1
+
+        # Need to implement
+        vertex.setFinish(self._time)
+
 if __name__ == '__main__':
     grf = Graph()
     grf.buildGraph('fourletterwords.txt')
