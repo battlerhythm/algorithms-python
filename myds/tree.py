@@ -114,12 +114,6 @@ class TreeNode(object):
     def isLeaf(self):
         return not (self._leftChild or self._rightChild)
 
-    # def hasLeftChild(self):
-    #     return self._leftChild
-    
-    # def hasRightChild(self):
-    #     return self._rightChild
-
     def hasAnyChildren(self):
         return self._leftChild or self._rightChild
 
