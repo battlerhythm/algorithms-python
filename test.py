@@ -1,40 +1,40 @@
 import unittest
 import cProfile
-from myds.sort import BubbleSort, InsertionSort, SelectionSort, MergeSort, QuickSort
+from myds.sort import bubbleSort, insertionSort, selectionSort, mergeSort, quickSort
 from myds.basic import Stack, Queue, Deque, LinkedList, BinaryHeap
 from myds.tree import BinarySearchTree, AvlTree
 from myds.graph import Graph
 
 class TestSortMethods(unittest.TestCase):
-    def test_BubbleSort(self):
+    def test_bubbleSort(self):
         alist1 = [4, 3, 2, 1, 0]
         alist2 = [0, 1, 4, 3, 2]
-        self.assertEqual(BubbleSort.sort(alist1), [0, 1, 2, 3, 4])
-        self.assertEqual(BubbleSort.sort(alist2), [0, 1, 2, 3, 4])
+        self.assertEqual(bubbleSort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(bubbleSort(alist2), [0, 1, 2, 3, 4])
 
-    def test_InsertionSort(self):
+    def test_insertionSort(self):
         alist1 = [4, 3, 2, 1, 0]
         alist2 = [0, 1, 4, 3, 2]
-        self.assertEqual(InsertionSort.sort(alist1), [0, 1, 2, 3, 4])
-        self.assertEqual(InsertionSort.sort(alist2), [0, 1, 2, 3, 4])
+        self.assertEqual(insertionSort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(insertionSort(alist2), [0, 1, 2, 3, 4])
 
-    def test_SelectionSort(self):
+    def test_selectionSort(self):
         alist1 = [4, 3, 2, 1, 0]
         alist2 = [0, 1, 4, 3, 2]
-        self.assertEqual(SelectionSort.sort(alist1), [0, 1, 2, 3, 4])
-        self.assertEqual(SelectionSort.sort(alist2), [0, 1, 2, 3, 4])
+        self.assertEqual(selectionSort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(selectionSort(alist2), [0, 1, 2, 3, 4])
 
-    def test_MergeSort(self):
+    def test_mergeSort(self):
         alist1 = [4, 3, 2, 1, 0]
         alist2 = [0, 1, 4, 3, 2]
-        self.assertEqual(MergeSort.sort(alist1), [0, 1, 2, 3, 4])
-        self.assertEqual(MergeSort.sort(alist2), [0, 1, 2, 3, 4])
+        self.assertEqual(mergeSort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(mergeSort(alist2), [0, 1, 2, 3, 4])
 
-    def test_QuickSort(self):
+    def test_quickSort(self):
         alist1 = [4, 3, 2, 1, 0]
         alist2 = [0, 1, 4, 3, 2]
-        self.assertEqual(QuickSort.sort(alist1), [0, 1, 2, 3, 4])
-        self.assertEqual(QuickSort.sort(alist2), [0, 1, 2, 3, 4])
+        self.assertEqual(quickSort(alist1), [0, 1, 2, 3, 4])
+        self.assertEqual(quickSort(alist2), [0, 1, 2, 3, 4])
 
 class TestDSMethods(unittest.TestCase):
     def test_Stack(self):
