@@ -5,7 +5,7 @@ python:
   - "3.7-dev"  # 3.7 development branch
 env:
   global:
-    - CC_TEST_REPORTER_ID=2510c3a6fc25b3468c8571bce0afd8a76de1af91627a1f4c6227cd9166bd12d5
+    - CC_TEST_REPORTER_ID=fc2dab3f5cb43356a01351fc2303e4e1274c372dee85d7a1b68fe6204b2e1c3b
 
 # command to install dependencies
 install:
