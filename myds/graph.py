@@ -179,7 +179,7 @@ class DFSGraph(Graph):
         vertex.setFinish(self._time)
 
 if __name__ == '__main__':
-    grf = Graph()
-    grf.buildGraph('fourletterwords.txt')
+    grf = BFSGraph()
+    grf.buildGraph('../fourletterwords.txt')
     grf.bfs('FOOL')
     print(grf.traverse('SAGE'))
