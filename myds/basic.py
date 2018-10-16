@@ -1,4 +1,82 @@
-from myds.node import Node
+class Stack(object):
+    def __init__(self):
+        self._items = []
+
+    def __str__(self):
+        return str(self._items)  
+
+    def __len__(self):
+        return len(self._items)
+
+    def isEmpty(self):
+        return self._items == []
+
+    def push(self, item):
+        self._items.append(item)
+
+    def peek(self):
+        return self._items[-1]
+
+    def pop(self):
+        return self._items.pop()
+
+class Queue(object):
+    def __init__(self):
+        self._items = []
+
+    def __str__(self):
+        return str(self._items)
+
+    def __len__(self):
+        return len(self._items)
+
+    def isEmpty(self):
+        return self._items == []
+
+    def enqueue(self, item):
+        self._items.append(item)
+
+    def dequeue(self):
+        return self._items.pop(0)
+
+class Deque(Queue):
+    def __init__(self):
+        super().__init__()
+
+    def enqueueLeft(self, item):
+        return self._items.insert(0, item)
+
+    def dequeueRight(self):
+        return self._items.pop(-1)
+
+class Node(object):
+    def __init__(self, data):
+        self._data = data
+        self._nextNode = None
+        self._prevNode = None
+
+    @property
+    def data(self):
+        """Return the data in the node"""
+        return self._data
+
+    @property
+    def nextNode(self):
+        """Return the next node of the Node"""
+        return self._nextNode
+
+    @property
+    def prevNode(self):
+        """Return the previous node of the Node"""
+        return self._prevNode
+  
+    @nextNode.setter
+    def nextNode(self, newNextNode):
+        self._nextNode = newNextNode
+  
+    @prevNode.setter
+    def prevNode(self, newPrevNode):
+        self._prevNode = newPrevNode
 
 class LinkedList(object):
     def __init__(self):

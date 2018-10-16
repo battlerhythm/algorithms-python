@@ -1,10 +1,7 @@
 import unittest
 import cProfile
 from myds.sort import bubbleSort, insertionSort, selectionSort, mergeSort, quickSort
-from myds.stack import Stack
-from myds.queue import Queue
-from myds.deque import Deque
-from myds.linkedlist import LinkedList
+from myds.basic import Stack, Queue, Deque, LinkedList
 from myds.tree import BinaryHeap, BinarySearchTree, AvlTree
 from myds.graph import Graph
 
