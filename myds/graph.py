@@ -1,5 +1,5 @@
 import sys
-from myds.basic import Queue
+from myds.queue import Queue
 
 class Vertex(object):
     def __init__(self, key):
